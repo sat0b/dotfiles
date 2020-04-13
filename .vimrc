@@ -3,6 +3,16 @@ call plug#begin('~/.vim/plugged')
     Plug 'w0ng/vim-hybrid'
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'ryanolsonx/vim-lsp-python', {'for' : 'python'}
+    Plug 'ryanolsonx/vim-lsp-javascript', {'for' : ['javascript', 'javascript.jsx']}
 call plug#end()
 
 filetype plugin on
@@ -24,7 +34,6 @@ set undodir=~/.vim/undo
 
 set history=10000
 
-set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 cnoremap <C-p> <Up>
@@ -57,3 +66,20 @@ let $PATH = "~/.pyenv/shims:".$PATH
 
 set backspace=indent,eol,start
 set cm=blowfish2
+
+" vim markdown
+set nofoldenable
+
+" lsp
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+let g:ycm_auto_trigger = 1
+ 
+function! s:configure_lsp() abort
+    setlocal omnifunc=lsp#complete
+    nnoremap <buffer> gd :<C-u>LspDefinition<CR>
+    nnoremap <buffer> gD :<C-u>LspReferences<CR>
+    nnoremap <buffer> K  :<C-u>LspHover<CR>
+endfunction
+
+let g:lsp_diagnostics_enabled = 0

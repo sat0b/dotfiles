@@ -15,6 +15,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/vim-lsp-settings'
     Plug 'ryanolsonx/vim-lsp-python', {'for' : 'python'}
     Plug 'ryanolsonx/vim-lsp-javascript', {'for' : ['javascript', 'javascript.jsx']}
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'vim-airline/vim-airline'
+    Plug 'mhinz/vim-startify'
 call plug#end()
 
 " Basic
@@ -68,10 +72,10 @@ hi DiffChange ctermfg=black ctermbg=3
 hi DiffDelete ctermfg=black ctermbg=6
 hi DiffText   ctermfg=black ctermbg=7
 
-" vim markdown
+" Vim Markdown
 set nofoldenable
 
-" lsp
+" LSP
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
 let g:ycm_auto_trigger = 1
@@ -84,3 +88,16 @@ function! s:configure_lsp() abort
 endfunction
 
 let g:lsp_diagnostics_enabled = 0
+
+" GitGutter
+set updatetime=250  
+let g:gitgutter_max_signs = 500  
+let g:gitgutter_map_keys = 0  
+let g:gitgutter_override_sign_column_highlight = 0  
+
+highlight clear SignColumn  
+highlight GitGutterAdd ctermfg=2  
+highlight GitGutterChange ctermfg=3  
+highlight GitGutterDelete ctermfg=1  
+highlight GitGutterChangeDelete ctermfg=4  
+

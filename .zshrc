@@ -12,6 +12,7 @@ setopt correct
 setopt no_flow_control
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin/:$PATH"
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 # Enable Ctrl-x-e to edit command line

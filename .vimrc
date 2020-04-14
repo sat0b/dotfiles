@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
     Plug 'plasticboy/vim-markdown'
+    Plug 'godlygeek/tabular'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/asyncomplete.vim'

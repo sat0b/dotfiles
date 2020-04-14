@@ -16,6 +16,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ryanolsonx/vim-lsp-python', {'for' : 'python'}
     Plug 'ryanolsonx/vim-lsp-javascript', {'for' : ['javascript', 'javascript.jsx']}
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'tommcdo/vim-fubitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'vim-airline/vim-airline'
     Plug 'mhinz/vim-startify'

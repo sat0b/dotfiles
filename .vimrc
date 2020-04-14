@@ -1,13 +1,11 @@
 " Plug
 call plug#begin('~/.vim/plugged')
+    Plug 'justinmk/vim-dirvish'
     Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'Lokaltog/powerline'
-    Plug 'w0ng/vim-hybrid'
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
-    Plug 'godlygeek/tabular'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/vim-lsp'
@@ -19,9 +17,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-rhubarb'
     Plug 'tommcdo/vim-fubitive'
     Plug 'airblade/vim-gitgutter'
-    Plug 'vim-airline/vim-airline'
     Plug 'mhinz/vim-startify'
-    Plug 'justinmk/vim-dirvish'
 call plug#end()
 
 " Basic

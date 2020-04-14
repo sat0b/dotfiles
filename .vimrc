@@ -19,6 +19,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'vim-airline/vim-airline'
     Plug 'mhinz/vim-startify'
+    Plug 'justinmk/vim-dirvish'
 call plug#end()
 
 " Basic
@@ -76,18 +77,26 @@ hi DiffText   ctermfg=black ctermbg=7
 set nofoldenable
 
 " LSP
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-let g:ycm_auto_trigger = 1
- 
-function! s:configure_lsp() abort
-    setlocal omnifunc=lsp#complete
-    nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-    nnoremap <buffer> gD :<C-u>LspReferences<CR>
-    nnoremap <buffer> K  :<C-u>LspHover<CR>
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <f2> <plug>(lsp-rename)
+  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 endfunction
 
-let g:lsp_diagnostics_enabled = 0
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_popup_delay = 200
+let g:lsp_text_edit_enabled = 1
 
 " GitGutter
 set updatetime=250  

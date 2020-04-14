@@ -33,6 +33,7 @@ set autoindent
 set smarttab
 set laststatus=1
 set hlsearch
+set clipboard=unnamed
 
 set backup
 set backupdir=~/.vim/backup
@@ -59,6 +60,8 @@ let $PATH = "~/.pyenv/shims:".$PATH
 
 set backspace=indent,eol,start
 set cm=blowfish2
+
+autocmd QuickFixCmdPost *grep* cwindow
 
 
 " File
@@ -110,3 +113,5 @@ highlight GitGutterChange ctermfg=3
 highlight GitGutterDelete ctermfg=1  
 highlight GitGutterChangeDelete ctermfg=4  
 
+" Fugitive
+command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!

@@ -1,19 +1,14 @@
 " Plug
 call plug#begin('~/.vim/plugged')
     Plug 'justinmk/vim-dirvish'
-    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
     Plug 'plasticboy/vim-markdown'
     Plug 'godlygeek/tabular'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'ryanolsonx/vim-lsp-python', {'for' : 'python'}
-    Plug 'ryanolsonx/vim-lsp-javascript', {'for' : ['javascript', 'javascript.jsx']}
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'tommcdo/vim-fubitive'
@@ -33,6 +28,12 @@ set smarttab
 set laststatus=1
 set hlsearch
 set clipboard=unnamed
+
+set hidden
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 set backup
 set backupdir=~/.vim/backup
@@ -78,28 +79,6 @@ hi DiffText   ctermfg=black ctermbg=7
 " Vim Markdown
 set nofoldenable
 
-" LSP
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
-  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-endfunction
-
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 0
-let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 1
-
 " GitGutter
 set updatetime=250  
 let g:gitgutter_max_signs = 500  
@@ -114,3 +93,47 @@ highlight GitGutterChangeDelete ctermfg=4
 
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
+
+" coc.vim
+let g:coc_global_extensions = [ 'coc-json', 'coc-python', 'coc-rls', 'coc-go' ]
+  
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-n> coc#refresh()
+
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+

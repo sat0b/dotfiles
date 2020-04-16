@@ -20,7 +20,6 @@ call plug#end()
 filetype plugin on
 syntax on
 
-set tabstop=4
 set expandtab
 set shiftwidth=4
 set autoindent
@@ -28,6 +27,12 @@ set smarttab
 set laststatus=1
 set hlsearch
 set clipboard=unnamed
+
+set tabstop=4
+augroup HTML_2_INDENT
+    autocmd!
+    autocmd FileType html setlocal shiftwidth=2 tabstop=4 softtabstop=2
+augroup END
 
 set hidden
 set cmdheight=2
@@ -95,7 +100,16 @@ highlight GitGutterChangeDelete ctermfg=4
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
 " coc.vim
-let g:coc_global_extensions = [ 'coc-json', 'coc-python', 'coc-rls', 'coc-go' ]
+let g:coc_global_extensions = [ 
+            \ 'coc-json', 
+            \ 'coc-python', 
+            \ 'coc-rls', 
+            \ 'coc-go', 
+            \ 'coc-tsserver', 
+            \ 'coc-eslint', 
+            \ 'coc-json', 
+            \ 'coc-html',
+            \ 'coc-yaml' ]
   
 
 inoremap <silent><expr> <TAB>

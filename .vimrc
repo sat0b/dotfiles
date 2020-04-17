@@ -2,6 +2,7 @@
 call plug#begin('~/.vim/plugged')
     Plug 'justinmk/vim-dirvish'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'

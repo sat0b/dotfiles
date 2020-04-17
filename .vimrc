@@ -68,6 +68,11 @@ set cm=blowfish2
 
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Fzf
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-r> :Rg<CR>
+nnoremap <C-h> :History<CR>
 
 " File
 let _curfile=expand("%:r")

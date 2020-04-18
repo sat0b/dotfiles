@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-rhubarb'
     Plug 'tommcdo/vim-fubitive'
     Plug 'airblade/vim-gitgutter'
+    Plug 'dbridges/vim-markdown-runner'
 call plug#end()
 
 " Basic
@@ -70,7 +71,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 " Fzf
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :Files<CR>
-nnoremap <C-r> :Rg<CR>
+nnoremap <C-n> :Rg<CR>
 nnoremap <C-h> :History<CR>
 
 " File
@@ -113,7 +114,8 @@ let g:coc_global_extensions = [
             \ 'coc-eslint', 
             \ 'coc-json', 
             \ 'coc-html',
-            \ 'coc-yaml' ]
+            \ 'coc-yaml',
+            \ 'coc-sh' ]
   
 
 inoremap <silent><expr> <TAB>
@@ -154,4 +156,7 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" vim-markdown
+let g:markdown_runners['python'] = 'python3'
 

@@ -71,7 +71,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 " Fzf
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :Files<CR>
-nnoremap <C-n> :Rg<CR>
+nnoremap <C-g> :Rg<CR>
 nnoremap <C-h> :History<CR>
 
 " File

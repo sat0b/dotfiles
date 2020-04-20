@@ -5,3 +5,5 @@ for file in $(ls -a | grep "^\.\w"); do
     ln -sf "$(pwd)/$file" "$HOME/$file"
 done
 
+# vim
+mkdir -p ~/.vim/backup ~/.vim/undo

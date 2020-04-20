@@ -1,6 +1,6 @@
 " Plug
 call plug#begin('~/.vim/plugged')
-    Plug 'justinmk/vim-dirvish'
+    Plug 'cocopon/vaffle.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
@@ -9,11 +9,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'plasticboy/vim-markdown'
     Plug 'godlygeek/tabular'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb'
-    Plug 'tommcdo/vim-fubitive'
-    Plug 'airblade/vim-gitgutter'
     Plug 'dbridges/vim-markdown-runner'
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Basic

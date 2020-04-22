@@ -64,7 +64,7 @@ let $PATH = "~/.pyenv/shims:".$PATH
 set backspace=indent,eol,start
 set cm=blowfish2
 
-autocmd QuickFixCmdPost *grep* cwindow
+" autocmd QuickFixCmdPost *grep* cwindow
 
 " Fzf
 nnoremap <C-b> :Buffers<CR>
@@ -98,6 +98,9 @@ highlight GitGutterAdd ctermfg=2
 highlight GitGutterChange ctermfg=3  
 highlight GitGutterDelete ctermfg=1  
 highlight GitGutterChangeDelete ctermfg=4  
+
+nmap <silent><leader>dm :let g:gitgutter_diff_base = 'master'<CR> :GitGutter<CR>
+nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!

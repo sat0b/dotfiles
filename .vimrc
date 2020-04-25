@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dbridges/vim-markdown-runner'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
+    Plug 'mechatroner/rainbow_csv'
 call plug#end()
 
 " Basic

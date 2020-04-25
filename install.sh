@@ -7,3 +7,6 @@ done
 
 # vim
 mkdir -p ~/.vim/backup ~/.vim/undo
+
+mkdir -p ~/.config/fish/
+ln -s $(pwd)/config.fish ~/.config/fish/config.fish

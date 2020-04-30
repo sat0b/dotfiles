@@ -72,6 +72,7 @@ nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-g> :Rg<CR>
 nnoremap <C-h> :History<CR>
+nnoremap <C-l> :GitFiles<CR>
 
 " File
 let _curfile=expand("%:r")

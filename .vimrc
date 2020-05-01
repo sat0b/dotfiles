@@ -7,6 +7,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'ryanolsonx/vim-lsp-javascript'
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
     Plug 'plasticboy/vim-markdown'

@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
     Plug 'plasticboy/vim-markdown'
+    Plug 'ferrine/md-img-paste.vim'
     Plug 'godlygeek/tabular'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
     Plug 'dbridges/vim-markdown-runner'
@@ -35,11 +36,11 @@ set clipboard=unnamed
 set tabstop=4
 augroup HTML_2_INDENT
     autocmd!
-    autocmd FileType html setlocal shiftwidth=2 tabstop=4 softtabstop=2
-    autocmd FileType ts setlocal shiftwidth=2 tabstop=4 softtabstop=2
-    autocmd FileType js setlocal shiftwidth=2 tabstop=4 softtabstop=2
-    autocmd FileType tsx setlocal shiftwidth=2 tabstop=4 softtabstop=2
-    autocmd FileType jsx setlocal shiftwidth=2 tabstop=4 softtabstop=2
+    autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
 set hidden
@@ -98,6 +99,9 @@ hi DiffText   ctermfg=black ctermbg=7
 " Vim Markdown
 set nofoldenable
 
+" md-img-paste.vim
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+
 " GitGutter
 set updatetime=250  
 let g:gitgutter_max_signs = 500  
@@ -125,3 +129,4 @@ inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
+

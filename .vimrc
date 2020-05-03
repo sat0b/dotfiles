@@ -19,6 +19,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'mechatroner/rainbow_csv'
+    Plug 'tpope/vim-eunuch'
+    Plug 'alok/notational-fzf-vim'
 call plug#end()
 
 " Basic
@@ -33,6 +35,12 @@ set laststatus=1
 set hlsearch
 set clipboard=unnamed
 
+if has("mouse")
+  set mouse=a
+endif
+
+autocmd BufEnter * silent! lcd %:p:h
+
 set tabstop=4
 augroup HTML_2_INDENT
     autocmd!
@@ -41,6 +49,7 @@ augroup HTML_2_INDENT
     autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
 set hidden
@@ -65,6 +74,9 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+inoremap <Leader>fn <C-R>=expand("%:t:r")<CR>
+inoremap <leader>fp <C-R>=expand("%:h")<CR>
 
 set pastetoggle=<f5>
 
@@ -119,6 +131,10 @@ nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
+
+" notational-fzf-vim
+let g:nv_search_paths = ['~/notes']
+let g:nv_default_extension = '.md'
 
 " lsp
 setlocal omnifunc=lsp#complete

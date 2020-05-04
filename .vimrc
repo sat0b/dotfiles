@@ -27,17 +27,19 @@ call plug#end()
 filetype plugin on
 syntax on
 
+set noignorecase
+set smartcase
 set expandtab
 set shiftwidth=4
 set autoindent
 set smarttab
+set smartindent
 set laststatus=1
 set hlsearch
 set clipboard=unnamed
-
-if has("mouse")
-  set mouse=a
-endif
+set wrapscan
+set wildmenu
+set showmatch
 
 autocmd BufEnter * silent! lcd %:p:h
 
@@ -75,12 +77,10 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
-inoremap <Leader>fn <C-R>=expand("%:t:r")<CR>
-inoremap <leader>fp <C-R>=expand("%:h")<CR>
+nnoremap <leader>c :setlocal conceallevel=<c-r>=&conceallevel == 0 ? '2' : '0'<cr><cr>
 
 set pastetoggle=<f5>
 
-set wildmenu
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 let $PATH = "~/.pyenv/shims:".$PATH
 
@@ -110,6 +110,10 @@ hi DiffText   ctermfg=black ctermbg=7
 
 " Vim Markdown
 set nofoldenable
+let g:vim_markdown_autowrite = 1
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_math = 1
 
 " md-img-paste.vim
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>

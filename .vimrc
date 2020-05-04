@@ -28,6 +28,7 @@ call plug#end()
 filetype plugin on
 syntax on
 
+set background=dark
 set noignorecase
 set smartcase
 set expandtab
@@ -143,7 +144,7 @@ let g:nv_default_extension = '.md'
 
 " startify
 let g:startify_files_number = 10
-let g:startify_bookmarks = ['~/.vimrc',]
+let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 
 " lsp

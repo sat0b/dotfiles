@@ -1,5 +1,6 @@
 " Plug
 call plug#begin('~/.vim/plugged')
+    Plug 'mhinz/vim-startify'
     Plug 'justinmk/vim-dirvish'
     Plug 'kristijanhusak/vim-dirvish-git'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -139,6 +140,11 @@ command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 " notational-fzf-vim
 let g:nv_search_paths = ['~/notes']
 let g:nv_default_extension = '.md'
+
+" startify
+let g:startify_files_number = 10
+let g:startify_bookmarks = ['~/.vimrc',]
+let g:startify_custom_header = []
 
 " lsp
 setlocal omnifunc=lsp#complete

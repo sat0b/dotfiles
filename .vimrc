@@ -1,6 +1,7 @@
 " Plug
 call plug#begin('~/.vim/plugged')
     Plug 'mhinz/vim-startify'
+    Plug 'yuki-ycino/fzf-preview.vim'
     Plug 'justinmk/vim-dirvish'
     Plug 'kristijanhusak/vim-dirvish-git'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -21,13 +22,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'mechatroner/rainbow_csv'
     Plug 'tpope/vim-eunuch'
-    Plug 'alok/notational-fzf-vim'
 call plug#end()
 
 " Basic
 filetype plugin on
 syntax on
 
+
+set encoding=UTF-8
 set background=dark
 set noignorecase
 set smartcase
@@ -53,7 +55,7 @@ augroup HTML_2_INDENT
     autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType markdown setlocal conceallevel=2
 augroup END
 
 set hidden
@@ -113,9 +115,10 @@ hi DiffText   ctermfg=black ctermbg=7
 " Vim Markdown
 set nofoldenable
 let g:vim_markdown_autowrite = 1
-let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_new_list_item_indent = 4
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_math = 1
+let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
 
 " md-img-paste.vim
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
@@ -138,12 +141,8 @@ nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
-" notational-fzf-vim
-let g:nv_search_paths = ['~/notes']
-let g:nv_default_extension = '.md'
-
 " startify
-let g:startify_files_number = 10
+let g:startify_files_number = 15
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 

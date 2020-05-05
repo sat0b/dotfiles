@@ -15,5 +15,5 @@ set -x FZF_FIND_FILE_COMMAND $FZF_DEFAULT_COMMAND
 alias l='ls -G'
 alias ll='ls -lG'
 alias grep='grep --color'
-
+alias rm='rmtrash'
 

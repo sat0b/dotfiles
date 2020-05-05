@@ -22,6 +22,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'mechatroner/rainbow_csv'
     Plug 'tpope/vim-eunuch'
+    Plug 'eugen0329/vim-esearch'
+    Plug 'airblade/vim-rooter'
+    Plug 'vim-jp/vimdoc-ja'
 call plug#end()
 
 " Basic

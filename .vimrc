@@ -25,6 +25,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'eugen0329/vim-esearch'
     Plug 'airblade/vim-rooter'
     Plug 'vim-jp/vimdoc-ja'
+    Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " Basic
@@ -75,6 +76,9 @@ set undodir=~/.vim/undo
 set history=10000
 
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
+map <C-Tab> gt
+map <C-S-Tab> gT
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -145,7 +149,7 @@ nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
 " startify
-let g:startify_files_number = 15
+let g:startify_files_number = 20
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 
@@ -159,3 +163,7 @@ inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 
+augroup LspAutoFormatting
+    autocmd!
+    autocmd BufWritePre *.py LspDocumentFormatSync
+augroup END

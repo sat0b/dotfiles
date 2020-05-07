@@ -47,6 +47,7 @@ set hlsearch
 set clipboard=unnamed
 set wrapscan
 set wildmenu
+set wildmode=longest:list,full
 set showmatch
 
 autocmd BufEnter * silent! lcd %:p:h
@@ -59,7 +60,6 @@ augroup HTML_2_INDENT
     autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType markdown setlocal conceallevel=2
 augroup END
 
 set hidden
@@ -96,7 +96,10 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 let $PATH = "~/.pyenv/shims:".$PATH
 
 set backspace=indent,eol,start
-set cm=blowfish2
+
+if !has('nvim')
+  setlocal cm=blowfish2
+end
 
 " autocmd QuickFixCmdPost *grep* cwindow
 

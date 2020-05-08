@@ -25,6 +25,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'eugen0329/vim-esearch'
     Plug 'airblade/vim-rooter'
     Plug 'vim-jp/vimdoc-ja'
+    Plug 'glidenote/memolist.vim'
     Plug 'itchyny/lightline.vim'
 call plug#end()
 
@@ -155,6 +156,16 @@ command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 let g:startify_files_number = 20
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
+
+" memolist
+let g:memolist_path = "~/notes"
+nnoremap <Leader>mn  :MemoNew<CR>
+nnoremap <Leader>ml  :MemoList<CR>
+nnoremap <Leader>mg  :MemoGrep<CR>
+let g:memolist_memo_suffix = "md"
+let g:memolist_prompt_tags = 1
+let g:memolist_prompt_categories = 1
+let g:memolist_template_dir_path = '~/.config/nvim/memolist_template/'
 
 " lsp
 setlocal omnifunc=lsp#complete

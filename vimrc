@@ -1,6 +1,5 @@
 " Plug
 call plug#begin('~/.vim/plugged')
-    Plug 'kaicataldo/material.vim'
     Plug 'mhinz/vim-startify'
     Plug 'justinmk/vim-dirvish'
     Plug 'kristijanhusak/vim-dirvish-git'
@@ -9,6 +8,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nicwest/vim-http'
     Plug 'prabirshrestha/async.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'ianks/vim-tsx'
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
     Plug 'plasticboy/vim-markdown'
@@ -99,9 +99,6 @@ if !has('nvim')
 end
 
 " autocmd QuickFixCmdPost *grep* cwindow
-"
-colorscheme material
-let g:material_theme_style = 'default'
 
 " Fzf
 nnoremap <C-b> :Buffers<CR>
@@ -125,9 +122,10 @@ hi DiffText   ctermfg=black ctermbg=7
 " Vim Markdown
 set nofoldenable
 let g:vim_markdown_autowrite = 1
-let g:vim_markdown_new_list_item_indent = 4
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_math = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
 
 " md-img-paste.vim

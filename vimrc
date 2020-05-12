@@ -1,5 +1,7 @@
 " Plug
+
 call plug#begin('~/.vim/plugged')
+    Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'mhinz/vim-startify'
     Plug 'justinmk/vim-dirvish'
     Plug 'kristijanhusak/vim-dirvish-git'
@@ -242,3 +244,5 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile

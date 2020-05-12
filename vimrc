@@ -3,8 +3,7 @@
 call plug#begin('~/.vim/plugged')
     Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'mhinz/vim-startify'
-    Plug 'justinmk/vim-dirvish'
-    Plug 'kristijanhusak/vim-dirvish-git'
+    Plug 'cocopon/vaffle.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'nicwest/vim-http'
@@ -23,7 +22,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'mechatroner/rainbow_csv'
     Plug 'tpope/vim-eunuch'
     Plug 'eugen0329/vim-esearch'
-    Plug 'airblade/vim-rooter'
     Plug 'vim-jp/vimdoc-ja'
     Plug 'glidenote/memolist.vim'
     Plug 'itchyny/lightline.vim'
@@ -106,7 +104,7 @@ end
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-g> :Rg<CR>
-nnoremap <C-h> :History<CR>
+nnoremap <C-s> :History<CR>
 nnoremap <C-l> :GitFiles<CR>
 
 " File
@@ -152,7 +150,7 @@ nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
 " startify
-let g:startify_files_number = 20
+let g:startify_files_number = 100
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 
@@ -193,7 +191,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nmap tt :CocCommand explorer --preset floating<CR>
+nnoremap <silent><C-h> :Vaffle<CR>
+let g:vaffle_auto_cd = 1
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -226,9 +225,6 @@ xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
-
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
 
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)

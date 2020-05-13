@@ -2,6 +2,7 @@
 
 call plug#begin('~/.vim/plugged')
     Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'sat0b/memolist.vim'
     Plug 'mhinz/vim-startify'
     Plug 'cocopon/vaffle.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -23,7 +24,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-eunuch'
     Plug 'eugen0329/vim-esearch'
     Plug 'vim-jp/vimdoc-ja'
-    Plug 'glidenote/memolist.vim'
     Plug 'itchyny/lightline.vim'
 call plug#end()
 
@@ -150,7 +150,7 @@ nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
 " startify
-let g:startify_files_number = 100
+let g:startify_files_number = 50
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 

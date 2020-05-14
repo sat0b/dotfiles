@@ -3,6 +3,7 @@
 call plug#begin('~/.vim/plugged')
     Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'sat0b/memolist.vim'
+    Plug 'easymotion/vim-easymotion'
     Plug 'mhinz/vim-startify'
     Plug 'cocopon/vaffle.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -57,6 +58,7 @@ augroup HTML_2_INDENT
     autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
     autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
 set hidden
@@ -73,9 +75,6 @@ set undodir=~/.vim/undo
 set history=10000
 
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-
-map <C-Tab> gt
-map <C-S-Tab> gT
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>

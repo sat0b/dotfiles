@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'prabirshrestha/async.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'ianks/vim-tsx'
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
     Plug 'fatih/vim-go'
     Plug 'rust-lang/rust.vim'
     Plug 'plasticboy/vim-markdown'
@@ -93,26 +94,10 @@ let $PATH = "~/.pyenv/shims:".$PATH
 
 set backspace=indent,eol,start
 
-if !has('nvim')
-  setlocal cm=blowfish2
-end
+imap <silent> <leader>dt <C-r>=strftime("%Y-%m-%d")<CR>
+nmap <slient> <leader>dt <ESC>i<C-R>=strftime("%Y-%m-%d")<CR><CR><ESC>
+cmap <silent> <leader>dt <C-r>=strftime("%Y-%m-%d") 
 
-" autocmd QuickFixCmdPost *grep* cwindow
-
-" Fzf
-nnoremap <C-b> :Buffers<CR>
-nnoremap <C-p> :Files<CR>
-nnoremap <C-g> :Rg<CR>
-nnoremap <C-s> :History<CR>
-nnoremap <C-l> :GitFiles<CR>
-
-" File
-let _curfile=expand("%:r")
-if _curfile == 'Makefile'
-  set noexpandtab
-endif
-
-" Vimdiff
 hi DiffAdd    ctermfg=black ctermbg=2
 hi DiffChange ctermfg=black ctermbg=3
 hi DiffDelete ctermfg=black ctermbg=6
@@ -158,8 +143,19 @@ let g:memolist_path = "~/notes"
 nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>
 nnoremap <Leader>mg  :MemoGrep<CR>
+let g:memolist_fzf = 1
 let g:memolist_memo_suffix = "md"
 let g:memolist_template_dir_path = '~/.config/nvim/memolist_template/'
+
+" esearch
+let g:esearch = {
+  \ 'adapter':          'rg',
+  \ 'backend':          'nvim',
+  \ 'out':              'win',
+  \ 'batch_size':       1000,
+  \ 'use':              ['visual', 'hlsearch', 'last'],
+  \ 'default_mappings': 1,
+  \}
 
 " coc
 set updatetime=300

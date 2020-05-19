@@ -1,7 +1,75 @@
+" Basic
+filetype plugin on
+syntax on
+
+set autoindent
+set background=dark
+set backspace=indent,eol,start
+set backup
+set backupdir=~/.vim/backup
+set clipboard=unnamed
+set cmdheight=2
+set encoding=UTF-8
+set expandtab
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
+set hidden
+set history=10000
+set hlsearch
+set laststatus=1
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set noignorecase
+set pastetoggle=<f5>
+set shiftwidth=4
+set shortmess+=c
+set showmatch
+set signcolumn=yes
+set smartcase
+set smartindent
+set smarttab
+set tabstop=4
+set undodir=~/.vim/undo
+set undofile
+set updatetime=300
+set wildmenu
+set wrapscan
+
+nnoremap <Leader>w :w<CR>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+nnoremap <leader>c :setlocal conceallevel=<c-r>=&conceallevel == 0 ? '2' : '0'<cr><cr>
+inoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
+nnoremap <leader>tt a<C-R>=strftime("%Y-%m-%d")<CR><ESC>
+cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
+
+hi DiffAdd    ctermfg=black ctermbg=2
+hi DiffChange ctermfg=black ctermbg=3
+hi DiffDelete ctermfg=black ctermbg=6
+hi DiffText   ctermfg=black ctermbg=7
+
+let $PATH = "~/.pyenv/shims:".$PATH
 let mapleader = "\<Space>"
 
-" Plug
+autocmd BufEnter * silent! lcd %:p:h
 
+augroup INDENT_2
+    autocmd!
+    autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+augroup END
+
+" File	
+let _curfile=expand("%:r")	
+if _curfile == 'Makefile'	
+  set noexpandtab	
+endif	
+
+" Plug
 call plug#begin('~/.vim/plugged')
     Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'houtsnip/vim-emacscommandline'
@@ -30,79 +98,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-jp/vimdoc-ja'
     Plug 'itchyny/lightline.vim'
 call plug#end()
-
-" Basic
-filetype plugin on
-syntax on
-
-set encoding=UTF-8
-set background=dark
-set noignorecase
-set smartcase
-set expandtab
-set shiftwidth=4
-set autoindent
-set smarttab
-set smartindent
-set laststatus=1
-set hlsearch
-set clipboard=unnamed
-set wrapscan
-set wildmenu
-set showmatch
-
-autocmd BufEnter * silent! lcd %:p:h
-
-set tabstop=4
-augroup HTML_2_INDENT
-    autocmd!
-    autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
-augroup END
-
-set hidden
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-
-set backup
-set backupdir=~/.vim/backup
-set undofile
-set undodir=~/.vim/undo
-
-set history=10000
-
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-
-nnoremap <leader>c :setlocal conceallevel=<c-r>=&conceallevel == 0 ? '2' : '0'<cr><cr>
-
-set pastetoggle=<f5>
-
-set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
-let $PATH = "~/.pyenv/shims:".$PATH
-
-set backspace=indent,eol,start
-
-inoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
-nnoremap <leader>tt a<C-R>=strftime("%Y-%m-%d")<CR><ESC>
-cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
-
-:iab <expr> dts strftime("%c")
-
-hi DiffAdd    ctermfg=black ctermbg=2
-hi DiffChange ctermfg=black ctermbg=3
-hi DiffDelete ctermfg=black ctermbg=6
-hi DiffText   ctermfg=black ctermbg=7
 
 " Vim Markdown
 set nofoldenable
@@ -137,12 +132,6 @@ nnoremap <C-g> :Rg<CR>
 nnoremap <C-s> :History<CR>	
 nnoremap <C-l> :GitFiles<CR>	
 
-" File	
-let _curfile=expand("%:r")	
-if _curfile == 'Makefile'	
-  set noexpandtab	
-endif	
-
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
@@ -160,6 +149,10 @@ let g:esearch = {
   \ 'use':              ['visual', 'hlsearch', 'last'],
   \ 'default_mappings': 1,
   \}
+
+" vaffle
+nnoremap <silent><leader>h :Vaffle<CR>
+let g:vaffle_auto_cd = 1
 
 " coc
 inoremap <silent><expr> <TAB>
@@ -183,16 +176,10 @@ endif
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" vaffle
-nnoremap <silent><leader>h :Vaffle<CR>
-let g:vaffle_auto_cd = 1
-
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()

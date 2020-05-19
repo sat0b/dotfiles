@@ -1,3 +1,5 @@
+let mapleader = "\<Space>"
+
 " Plug
 
 call plug#begin('~/.vim/plugged')
@@ -128,6 +130,19 @@ highlight GitGutterChangeDelete ctermfg=4
 nmap <silent><leader>dm :let g:gitgutter_diff_base = 'master'<CR> :GitGutter<CR>
 nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 
+" Fzf
+nnoremap <C-b> :Buffers<CR>	
+nnoremap <C-p> :Files<CR>	
+nnoremap <C-g> :Rg<CR>	
+nnoremap <C-s> :History<CR>	
+nnoremap <C-l> :GitFiles<CR>	
+
+" File	
+let _curfile=expand("%:r")	
+if _curfile == 'Makefile'	
+  set noexpandtab	
+endif	
+
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
@@ -175,7 +190,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " vaffle
-nnoremap <silent><C-h> :Vaffle<CR>
+nnoremap <silent><leader>h :Vaffle<CR>
 let g:vaffle_auto_cd = 1
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>

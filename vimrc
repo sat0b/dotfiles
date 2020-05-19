@@ -2,7 +2,7 @@
 
 call plug#begin('~/.vim/plugged')
     Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'sat0b/memolist.vim'
+    Plug 'houtsnip/vim-emacscommandline'
     Plug 'easymotion/vim-easymotion'
     Plug 'mhinz/vim-startify'
     Plug 'cocopon/vaffle.vim'
@@ -77,9 +77,6 @@ set history=10000
 
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
@@ -94,9 +91,11 @@ let $PATH = "~/.pyenv/shims:".$PATH
 
 set backspace=indent,eol,start
 
-imap <silent> <leader>dt <C-r>=strftime("%Y-%m-%d")<CR>
-nmap <slient> <leader>dt <ESC>i<C-R>=strftime("%Y-%m-%d")<CR><CR><ESC>
-cmap <silent> <leader>dt <C-r>=strftime("%Y-%m-%d") 
+inoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
+nnoremap <leader>tt a<C-R>=strftime("%Y-%m-%d")<CR><ESC>
+cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
+
+:iab <expr> dts strftime("%c")
 
 hi DiffAdd    ctermfg=black ctermbg=2
 hi DiffChange ctermfg=black ctermbg=3
@@ -116,7 +115,6 @@ let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
 " GitGutter
-set updatetime=250  
 let g:gitgutter_max_signs = 500  
 let g:gitgutter_map_keys = 0  
 let g:gitgutter_override_sign_column_highlight = 0  
@@ -138,15 +136,6 @@ let g:startify_files_number = 50
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 
-" memolist
-let g:memolist_path = "~/notes"
-nnoremap <Leader>mn  :MemoNew<CR>
-nnoremap <Leader>ml  :MemoList<CR>
-nnoremap <Leader>mg  :MemoGrep<CR>
-let g:memolist_fzf = 1
-let g:memolist_memo_suffix = "md"
-let g:memolist_template_dir_path = '~/.config/nvim/memolist_template/'
-
 " esearch
 let g:esearch = {
   \ 'adapter':          'rg',
@@ -158,7 +147,6 @@ let g:esearch = {
   \}
 
 " coc
-set updatetime=300
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -186,6 +174,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" vaffle
 nnoremap <silent><C-h> :Vaffle<CR>
 let g:vaffle_auto_cd = 1
 

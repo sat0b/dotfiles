@@ -19,3 +19,4 @@ alias l='ls -G'
 alias ll='ls -lG'
 alias grep='grep --color'
 alias rm='rmtrash'
+

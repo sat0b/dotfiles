@@ -49,7 +49,6 @@ hi DiffDelete ctermfg=black ctermbg=6
 hi DiffText   ctermfg=black ctermbg=7
 
 let $PATH = "~/.pyenv/shims:".$PATH
-let mapleader = "\<Space>"
 
 autocmd BufEnter * silent! lcd %:p:h
 
@@ -71,32 +70,33 @@ endif
 
 " Plug
 call plug#begin('~/.vim/plugged')
-    Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'houtsnip/vim-emacscommandline'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'mhinz/vim-startify'
+    Plug 'airblade/vim-gitgutter'
     Plug 'cocopon/vaffle.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'nicwest/vim-http'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'ianks/vim-tsx'
-    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'dbridges/vim-markdown-runner'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'eugen0329/vim-esearch'
     Plug 'fatih/vim-go'
-    Plug 'rust-lang/rust.vim'
-    Plug 'plasticboy/vim-markdown'
     Plug 'ferrine/md-img-paste.vim'
     Plug 'godlygeek/tabular'
+    Plug 'houtsnip/vim-emacscommandline'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-    Plug 'dbridges/vim-markdown-runner'
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'mechatroner/rainbow_csv'
-    Plug 'tpope/vim-eunuch'
-    Plug 'eugen0329/vim-esearch'
-    Plug 'vim-jp/vimdoc-ja'
+    Plug 'ianks/vim-tsx'
     Plug 'itchyny/lightline.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'mechatroner/rainbow_csv'
+    Plug 'mhinz/vim-startify'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'nicwest/vim-http'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'prabirshrestha/async.vim'
+    Plug 'rust-lang/rust.vim'
+    Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'vim-jp/vimdoc-ja'
 call plug#end()
 
 " Vim Markdown
@@ -151,7 +151,7 @@ let g:esearch = {
   \}
 
 " vaffle
-nnoremap <silent><leader>h :Vaffle<CR>
+nnoremap <silent><C-h> :Vaffle<CR>
 let g:vaffle_auto_cd = 1
 
 " coc
@@ -213,8 +213,8 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 command! -nargs=0 Format :call CocAction('format')
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>

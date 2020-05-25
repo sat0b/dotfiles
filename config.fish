@@ -12,6 +12,7 @@ set -x FZF_LEGACY_KEYBINDINGS 0
 set -x FZF_FIND_FILE_COMMAND $FZF_DEFAULT_COMMAND
 
 # alias
+alias emacs='emacs -nw'
 alias v='vi'
 alias vi='vim'
 alias vim='nvim'

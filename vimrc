@@ -40,8 +40,9 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 nnoremap <leader>c :setlocal conceallevel=<c-r>=&conceallevel == 0 ? '2' : '0'<cr><cr>
 inoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
-nnoremap <leader>tt a<C-R>=strftime("%Y-%m-%d")<CR><ESC>
+nnoremap <leader>tt a<C-r>=strftime("%Y-%m-%d")<CR><ESC>
 cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
+nnoremap <leader>rr :Rename <C-r>%
 
 hi DiffAdd    ctermfg=black ctermbg=2
 hi DiffChange ctermfg=black ctermbg=3
@@ -62,15 +63,16 @@ augroup INDENT_2
     autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
-" File	
-let _curfile=expand("%:r")	
-if _curfile == 'Makefile'	
-  set noexpandtab	
-endif	
+" File
+let _curfile=expand("%:r")
+if _curfile == 'Makefile'
+  set noexpandtab
+endif
 
 " Plug
 call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'
+    Plug 'tommcdo/vim-fubitive'
     Plug 'cocopon/vaffle.vim'
     Plug 'dbridges/vim-markdown-runner'
     Plug 'easymotion/vim-easymotion'
@@ -97,6 +99,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'vim-jp/vimdoc-ja'
+    Plug 'mbbill/undotree'
+    Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 
 " Vim Markdown
@@ -112,25 +116,25 @@ let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
 " GitGutter
-let g:gitgutter_max_signs = 500  
-let g:gitgutter_map_keys = 0  
-let g:gitgutter_override_sign_column_highlight = 0  
+let g:gitgutter_max_signs = 500
+let g:gitgutter_map_keys = 0
+let g:gitgutter_override_sign_column_highlight = 0
 
-highlight clear SignColumn  
-highlight GitGutterAdd ctermfg=2  
-highlight GitGutterChange ctermfg=3  
-highlight GitGutterDelete ctermfg=1  
-highlight GitGutterChangeDelete ctermfg=4  
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+highlight GitGutterChangeDelete ctermfg=4
 
 nmap <silent><leader>dm :let g:gitgutter_diff_base = 'master'<CR> :GitGutter<CR>
 nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 
 " Fzf
-nnoremap <C-b> :Buffers<CR>	
-nnoremap <C-p> :Files<CR>	
-nnoremap <C-g> :Rg<CR>	
-nnoremap <C-s> :History<CR>	
-nnoremap <C-l> :GitFiles<CR>	
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-g> :Rg<CR>
+nnoremap <C-s> :History<CR>
+nnoremap <C-l> :GitFiles<CR>
 
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
@@ -149,6 +153,8 @@ let g:esearch = {
   \ 'use':              ['visual', 'hlsearch', 'last'],
   \ 'default_mappings': 1,
   \}
+
+let g:esearch#out#win#open = 'e'
 
 " vaffle
 nnoremap <silent><C-h> :Vaffle<CR>

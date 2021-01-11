@@ -3,7 +3,7 @@ filetype plugin on
 syntax on
 
 set autoindent
-set background=light
+set background=dark
 set backspace=indent,eol,start
 set backup
 set backupdir=~/.vim/backup
@@ -73,6 +73,7 @@ endif
 call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'tommcdo/vim-fubitive'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'cocopon/vaffle.vim'
     Plug 'dbridges/vim-markdown-runner'
     Plug 'easymotion/vim-easymotion'
@@ -88,7 +89,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'mechatroner/rainbow_csv'
     Plug 'mhinz/vim-startify'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'nicwest/vim-http'
     Plug 'plasticboy/vim-markdown'
     Plug 'prabirshrestha/async.vim'

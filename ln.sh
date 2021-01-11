@@ -16,3 +16,6 @@ mkdir -p ~/.config/nvim/
 ln -sf $(pwd)/vimrc ~/.config/nvim/init.vim
 ln -sf $(pwd)/vim/memolist_template/ ~/.config/nvim/
 
+# git
+ln -sf $(pwd)/.gitconfig ~/.gitconfig
+

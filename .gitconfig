@@ -1,0 +1,7 @@
+[alias]
+  files = !git diff --name-only $(git merge-base HEAD origin/master)
+  stat = !git diff --stat $(git merge-base HEAD origin/master)
+
+
+[user]
+	email = sat0b.3ee@gmail.com

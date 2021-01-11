@@ -44,10 +44,13 @@ nnoremap <leader>tt a<C-r>=strftime("%Y-%m-%d")<CR><ESC>
 cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
 nnoremap <leader>rr :Rename <C-r>%
 
+""" colors
 hi DiffAdd    ctermfg=black ctermbg=2
 hi DiffChange ctermfg=black ctermbg=3
 hi DiffDelete ctermfg=black ctermbg=6
 hi DiffText   ctermfg=black ctermbg=7
+hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 let $PATH = "~/.pyenv/shims:".$PATH
 
@@ -234,3 +237,5 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " coc-prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+

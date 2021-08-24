@@ -5,7 +5,8 @@ syntax on
 set autoindent
 set background=dark
 set backspace=indent,eol,start
-set backup
+set nobackup
+set nowritebackup
 set backupdir=~/.vim/backup
 set clipboard=unnamed
 set cmdheight=2
@@ -81,6 +82,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'dbridges/vim-markdown-runner'
     Plug 'easymotion/vim-easymotion'
     Plug 'eugen0329/vim-esearch'
+    Plug 'mhinz/vim-grepper'
+    Plug 'vim-scripts/vim-auto-save'
     Plug 'fatih/vim-go'
     Plug 'ferrine/md-img-paste.vim'
     Plug 'godlygeek/tabular'
@@ -104,7 +107,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-jp/vimdoc-ja'
     Plug 'mbbill/undotree'
     Plug 'bronson/vim-trailing-whitespace'
+    Plug 'tokorom/vim-review'
+    Plug 'jiangmiao/auto-pairs'
 call plug#end()
+
+" Autosave
+let g:auto_save = 1
 
 " Vim Markdown
 set nofoldenable
@@ -217,13 +225,31 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
 omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>

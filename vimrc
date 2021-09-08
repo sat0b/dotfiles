@@ -3,7 +3,7 @@ filetype plugin on
 syntax on
 
 set autoindent
-set background=dark
+set background=light
 set backspace=indent,eol,start
 set nobackup
 set nowritebackup

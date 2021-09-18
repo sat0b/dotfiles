@@ -16,7 +16,9 @@ set history=10000
 set hlsearch
 set laststatus=1
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set nobackup
 set noignorecase
+set nowritebackup
 set pastetoggle=<f5>
 set shiftwidth=4
 set shortmess+=c

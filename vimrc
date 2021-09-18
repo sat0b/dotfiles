@@ -74,6 +74,8 @@ endif
 
 " Plug
 call plug#begin('~/.vim/plugged')
+    Plug 'preservim/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'mbbill/undotree'
     Plug 'mhinz/vim-grepper'
     Plug 'vim-scripts/vim-auto-save'

@@ -3,10 +3,8 @@ filetype plugin on
 syntax on
 
 set autoindent
-set background=light
+set background=dark
 set backspace=indent,eol,start
-set nobackup
-set nowritebackup
 set backupdir=~/.vim/backup
 set clipboard=unnamed
 set cmdheight=2
@@ -34,7 +32,6 @@ set updatetime=300
 set wildmenu
 set wrapscan
 
-nnoremap <Leader>w :w<CR>
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
@@ -75,37 +72,21 @@ endif
 
 " Plug
 call plug#begin('~/.vim/plugged')
-    Plug 'airblade/vim-gitgutter'
-    Plug 'tommcdo/vim-fubitive'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'cocopon/vaffle.vim'
-    Plug 'dbridges/vim-markdown-runner'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'eugen0329/vim-esearch'
+    Plug 'mbbill/undotree'
     Plug 'mhinz/vim-grepper'
     Plug 'vim-scripts/vim-auto-save'
-    Plug 'fatih/vim-go'
-    Plug 'ferrine/md-img-paste.vim'
-    Plug 'godlygeek/tabular'
     Plug 'houtsnip/vim-emacscommandline'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-    Plug 'ianks/vim-tsx'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'mechatroner/rainbow_csv'
-    Plug 'mhinz/vim-startify'
-    Plug 'nicwest/vim-http'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'rust-lang/rust.vim'
-    Plug 'sat0b/markdown-url-paste.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
-    Plug 'vim-jp/vimdoc-ja'
-    Plug 'mbbill/undotree'
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'tokorom/vim-review'
     Plug 'jiangmiao/auto-pairs'
@@ -113,18 +94,6 @@ call plug#end()
 
 " Autosave
 let g:auto_save = 1
-
-" Vim Markdown
-set nofoldenable
-let g:vim_markdown_autowrite = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_math = 1
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
-
-" md-img-paste.vim
-autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 
 " GitGutter
 let g:gitgutter_max_signs = 500
@@ -155,113 +124,33 @@ let g:startify_files_number = 50
 let g:startify_bookmarks = ['~/.vimrc']
 let g:startify_custom_header = []
 
-" esearch
-let g:esearch = {
-  \ 'adapter':          'rg',
-  \ 'backend':          'nvim',
-  \ 'out':              'win',
-  \ 'batch_size':       1000,
-  \ 'use':              ['visual', 'hlsearch', 'last'],
-  \ 'default_mappings': 1,
-  \}
+" lsp
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+  inoremap <buffer> <expr><c-f> lsp#scroll(+4)
+  inoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
-let g:esearch#out#win#open = 'e'
+  let g:lsp_format_sync_timeout = 1000
+  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 
-" vaffle
-nnoremap <silent><C-h> :Vaffle<CR>
-let g:vaffle_auto_cd = 1
-
-" coc
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  " refer to doc to add more commands
 endfunction
 
-inoremap <silent><expr> <c-space> coc#refresh()
-
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>ac  <Plug>(coc-codeaction)
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" coc-prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 

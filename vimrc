@@ -2,8 +2,6 @@
 filetype plugin on
 syntax on
 
-set autoindent
-set background=dark
 set backspace=indent,eol,start
 set backupdir=~/.vim/backup
 set clipboard=unnamed
@@ -14,7 +12,6 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set hidden
 set history=10000
 set hlsearch
-set laststatus=1
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set nobackup
 set noignorecase
@@ -33,6 +30,7 @@ set undofile
 set updatetime=300
 set wildmenu
 set wrapscan
+set laststatus=1
 
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -43,14 +41,6 @@ inoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
 nnoremap <leader>tt a<C-r>=strftime("%Y-%m-%d")<CR><ESC>
 cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
 nnoremap <leader>rr :Rename <C-r>%
-
-""" colors
-hi DiffAdd    ctermfg=black ctermbg=2
-hi DiffChange ctermfg=black ctermbg=3
-hi DiffDelete ctermfg=black ctermbg=6
-hi DiffText   ctermfg=black ctermbg=7
-hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
-hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 let $PATH = "~/.pyenv/shims:".$PATH
 
@@ -73,9 +63,11 @@ if _curfile == 'Makefile'
 endif
 
 " Plug
-call plug#begin('~/.vim/plugged')
-    Plug 'preservim/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
+call plug#begin('~/.config/nvim/plugged')
+    Plug 'joshdick/onedark.vim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'eugen0329/vim-esearch'
+    Plug 'justinmk/vim-dirvish'
     Plug 'mbbill/undotree'
     Plug 'mhinz/vim-grepper'
     Plug 'vim-scripts/vim-auto-save'
@@ -84,7 +76,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'itchyny/lightline.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'airblade/vim-gitgutter'
@@ -92,12 +83,31 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
     Plug 'bronson/vim-trailing-whitespace'
-    Plug 'tokorom/vim-review'
     Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
+" onedark
+colorscheme onedark
+set termguicolors
+
+" review
+if &diff
+    colorscheme onedark
+endif
+set diffopt+=vertical
+
+hi DiffText   cterm=bold ctermfg=none ctermbg=none gui=none guifg=LightYellow guibg=none
+hi DiffChange cterm=bold ctermfg=none ctermbg=none gui=none guifg=Blue guibg=none
+hi DiffAdd    cterm=bold ctermfg=none ctermbg=none gui=none guifg=none guibg=#383c47
+hi DiffDelete cterm=bold ctermfg=none ctermbg=none gui=none guifg=none guibg=#333232
+
+nnoremap <Left> :tabp<CR>
+nnoremap <Right> :tabn<CR>
+nnoremap <Up> :tabs<CR>
+nnoremap <Down> :windo bd<CR>
+
 " Autosave
-let g:auto_save = 1
+let g:auto_save = 0
 
 " GitGutter
 let g:gitgutter_max_signs = 500
@@ -157,4 +167,3 @@ augroup lsp_install
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
-

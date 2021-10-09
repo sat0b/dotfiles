@@ -2,7 +2,7 @@
 filetype plugin on
 syntax on
 
-set mouse=a
+"set mouse=a
 set backspace=indent,eol,start
 set backupdir=~/.vim/backup
 set clipboard=unnamed
@@ -68,8 +68,6 @@ autocmd FileType qf nnoremap <buffer> t <C-W><Enter><C-W>T
 " Plug
 call plug#begin('~/.config/nvim/plugged')
     Plug 'joshdick/onedark.vim'
-    Plug 'codable/diffreview'
-    Plug 'kevinhwang91/nvim-bqf'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'eugen0329/vim-esearch'
     Plug 'justinmk/vim-dirvish'
@@ -83,9 +81,13 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
     Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-eunuch'
+    Plug 'romainl/vim-qf'
     Plug 'tpope/vim-fugitive'
+    Plug 'idanarye/vim-merginal'
     Plug 'tpope/vim-rhubarb'
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'jiangmiao/auto-pairs'
@@ -129,13 +131,13 @@ highlight GitGutterChangeDelete ctermfg=4
 nmap <silent><leader>dm :let g:gitgutter_diff_base = 'origin/master'<CR> :GitGutter<CR>
 nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
 
+nnoremap <C-f> <cmd>Telescope git_files<cr>
+nnoremap <C-g> <cmd>Telescope live_grep<cr>
+nnoremap <C-b> <cmd>Telescope buffers<cr>
+nnoremap <C-h> <cmd>Telescope oldfiles<cr>
+
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
-
-" startify
-let g:startify_files_number = 50
-let g:startify_bookmarks = ['~/.vimrc']
-let g:startify_custom_header = []
 
 " markdown
 let g:vim_markdown_folding_disabled = 1

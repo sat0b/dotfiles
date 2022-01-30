@@ -3,6 +3,7 @@ filetype plugin on
 syntax on
 
 "set mouse=a
+set nu
 set backspace=indent,eol,start
 set backupdir=~/.vim/backup
 set clipboard=unnamed
@@ -38,12 +39,7 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 nnoremap <leader>c :setlocal conceallevel=<c-r>=&conceallevel == 0 ? '2' : '0'<cr><cr>
-inoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
-nnoremap <leader>tt a<C-r>=strftime("%Y-%m-%d")<CR><ESC>
-cnoremap <leader>tt <C-r>=strftime("%Y-%m-%d")<CR>
 nnoremap <leader>rr :Rename <C-r>%
-
-let $PATH = "~/.pyenv/shims:".$PATH
 
 autocmd BufEnter * silent! lcd %:p:h
 
@@ -92,6 +88,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'jiangmiao/auto-pairs'
     Plug 'plasticboy/vim-markdown'
+    Plug 'folke/lsp-colors.nvim'
 call plug#end()
 
 " onedark
@@ -105,7 +102,7 @@ endif
 set diffopt+=vertical
 
 hi DiffText   cterm=bold ctermfg=none ctermbg=none gui=none guifg=LightYellow guibg=none
-hi DiffChange cterm=bold ctermfg=none ctermbg=none gui=none guifg=Blue guibg=none
+hi DiffChange cterm=bold ctermfg=none ctermbg=none gui=none guifg=LightBlue guibg=none
 hi DiffAdd    cterm=bold ctermfg=none ctermbg=none gui=none guifg=none guibg=#383c47
 hi DiffDelete cterm=bold ctermfg=none ctermbg=none gui=none guifg=none guibg=#333232
 
@@ -115,18 +112,18 @@ nnoremap <Up> :tabs<CR>
 nnoremap <Down> :windo bd<CR>
 
 " Autosave
-let g:auto_save = 0
+let g:auto_save = 1
 
 " GitGutter
 let g:gitgutter_max_signs = 500
 let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=2
-highlight GitGutterChange ctermfg=3
-highlight GitGutterDelete ctermfg=1
-highlight GitGutterChangeDelete ctermfg=4
+hi clear SignColumn
+hi GitGutterAdd ctermfg=2
+hi GitGutterChange ctermfg=3
+hi GitGutterDelete ctermfg=1
+hi GitGutterChangeDelete ctermfg=4
 
 nmap <silent><leader>dm :let g:gitgutter_diff_base = 'origin/master'<CR> :GitGutter<CR>
 nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
@@ -163,7 +160,6 @@ function! s:on_lsp_buffer_enabled() abort
   let g:lsp_format_sync_timeout = 1000
   autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 
-  " refer to doc to add more commands
 endfunction
 
 augroup lsp_install

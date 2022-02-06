@@ -3,7 +3,7 @@ filetype plugin on
 syntax on
 
 "set mouse=a
-set nu
+"set nu
 set backspace=indent,eol,start
 set backupdir=~/.vim/backup
 set clipboard=unnamed
@@ -63,41 +63,52 @@ autocmd FileType qf nnoremap <buffer> t <C-W><Enter><C-W>T
 
 " Plug
 call plug#begin('~/.config/nvim/plugged')
-    Plug 'joshdick/onedark.vim'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'eugen0329/vim-esearch'
-    Plug 'justinmk/vim-dirvish'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'romainl/vim-qf'
+
     Plug 'mbbill/undotree'
     Plug 'mhinz/vim-grepper'
     Plug 'vim-scripts/vim-auto-save'
+    Plug 'bronson/vim-trailing-whitespace'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'houtsnip/vim-emacscommandline'
+    Plug 'tpope/vim-eunuch'
+    Plug 'justinmk/vim-dirvish'
+
+    " color theme
+    Plug 'w0ng/vim-hybrid'
+
+
+    " search
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'eugen0329/vim-esearch'
+
+    " git
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
+    Plug 'idanarye/vim-merginal'
+    Plug 'tpope/vim-rhubarb'
+
+    " language
+    Plug 'plasticboy/vim-markdown'
+
+    " lsp
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-eunuch'
-    Plug 'romainl/vim-qf'
-    Plug 'tpope/vim-fugitive'
-    Plug 'idanarye/vim-merginal'
-    Plug 'tpope/vim-rhubarb'
-    Plug 'bronson/vim-trailing-whitespace'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'folke/lsp-colors.nvim'
+
+
 call plug#end()
 
 " onedark
-colorscheme onedark
+colorscheme hybrid
 set termguicolors
 
 " review
 if &diff
-    colorscheme onedark
+    colorscheme hybrid
 endif
 set diffopt+=vertical
 
@@ -110,6 +121,10 @@ nnoremap <Left> :tabp<CR>
 nnoremap <Right> :tabn<CR>
 nnoremap <Up> :tabs<CR>
 nnoremap <Down> :windo bd<CR>
+
+" fzf
+map <C-p> :Files<CR>
+nmap <leader>; :Buffers<CR>
 
 " Autosave
 let g:auto_save = 1
@@ -158,7 +173,6 @@ function! s:on_lsp_buffer_enabled() abort
   inoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
   let g:lsp_format_sync_timeout = 1000
-  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 
 endfunction
 
@@ -167,3 +181,4 @@ augroup lsp_install
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
+

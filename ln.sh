@@ -11,8 +11,7 @@ mkdir -p ~/.vim/backup ~/.vim/undo
 ln -sf "$(pwd)/config.fish" "$HOME/.config/fish/config.fish"
 
 # nvim
-mkdir -p ~/.config/nvim/
-ln -sf $(pwd)/vimrc ~/.config/nvim/init.vim
+ln -sf $(pwd)/nvim ~/.config/nvim
 
 # git
 ln -sf $(pwd)/.gitconfig ~/.gitconfig

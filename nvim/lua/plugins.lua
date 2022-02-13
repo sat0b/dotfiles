@@ -4,6 +4,7 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'justinmk/vim-dirvish'
   use 'w0ng/vim-hybrid'
+  use 'simeji/winresizer'
 
   -- lsp
   use "neovim/nvim-lspconfig"
@@ -26,17 +27,37 @@ require('packer').startup(function()
   -- search
   use "eugen0329/vim-esearch"
 
-  -- fuzzy finder
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+  -- telescope
   use {
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
 
+  -- tree
+  use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons', -- optional, for file icon
+      },
+      config = function() require'nvim-tree'.setup {} end
+  }
+
   -- git
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
+
+  -- github
+  use {
+	'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+	  'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
 end)
 
 -- fzf
@@ -151,10 +172,12 @@ cmp.setup({
 })
 
 -- formatter
-local nullls = require "null-ls"
-nullls.setup {
+local nullls = require "null-ls" nullls.setup {
   sources = {
     nullls.builtins.formatting.prettier,
   },
 }
+
+-- nvim-tree
+vim.cmd('map <C-n> :NvimTreeToggle<CR>')
 

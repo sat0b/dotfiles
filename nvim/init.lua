@@ -1,7 +1,16 @@
-vim.cmd("set nu")
-vim.cmd("set diffopt+=vertical")
+vim.cmd([[
+  set diffopt+=vertical
+  set undofile
+  set shiftwidth=4
+  set shortmess+=c
+  set showmatch
+  set signcolumn=yes
+  set smartcase
+  set smartindent
+  set smarttab
+  set tabstop=4
+]])
 
 require('plugins')
 vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
-
 

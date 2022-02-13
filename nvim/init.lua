@@ -9,6 +9,7 @@ vim.cmd([[
   set smartindent
   set smarttab
   set tabstop=4
+  set clipboard+=unnamedplus
 ]])
 
 require('plugins')

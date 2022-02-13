@@ -2,7 +2,6 @@ local use = require('packer').use
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'justinmk/vim-dirvish'
   use 'w0ng/vim-hybrid'
   use 'simeji/winresizer'
 
@@ -10,6 +9,12 @@ require('packer').startup(function()
   use "neovim/nvim-lspconfig"
   use "williamboman/nvim-lsp-installer"
   use "folke/lsp-colors.nvim"
+
+  -- treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
 
   -- formatter
   use { "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } }
@@ -180,4 +185,20 @@ local nullls = require "null-ls" nullls.setup {
 
 -- nvim-tree
 vim.cmd('map <C-n> :NvimTreeToggle<CR>')
+
+
+-- lsp
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+  virtual_text = false
+})
+
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd("autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})")
 

@@ -125,6 +125,7 @@ nnoremap <Down> :windo bd<CR>
 " fzf
 map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
+nmap ; :History<CR>
 
 " Autosave
 let g:auto_save = 1
@@ -173,6 +174,7 @@ function! s:on_lsp_buffer_enabled() abort
   inoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
   let g:lsp_format_sync_timeout = 1000
+  let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
 
 endfunction
 

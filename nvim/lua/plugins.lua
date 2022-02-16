@@ -16,6 +16,25 @@ require('packer').startup(function()
     run = ':TSUpdate'
   }
 
+  -- root (TODO)
+  use {
+    "ahmedkhalf/lsp-rooter.nvim",
+    config = function()
+      require("lsp-rooter").setup {}
+    end
+  }
+
+  -- filer
+  use "justinmk/vim-dirvish"
+  use "kristijanhusak/vim-dirvish-git"
+  -- use "tamago324/lir.nvim"
+  --
+  -- status line
+  use {
+    'nvim-lualine/lualine.nvim',
+  	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
   -- formatter
   use { "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } }
 
@@ -32,6 +51,10 @@ require('packer').startup(function()
   -- search
   use "eugen0329/vim-esearch"
 
+  -- fzf
+  use { "junegunn/fzf", run = ":call fzf#install()" }
+  use "junegunn/fzf.vim"
+
   -- telescope
   use {
     'nvim-telescope/telescope.nvim',
@@ -39,13 +62,13 @@ require('packer').startup(function()
   }
 
   -- tree
-  use {
-      'kyazdani42/nvim-tree.lua',
-      requires = {
-        'kyazdani42/nvim-web-devicons', -- optional, for file icon
-      },
-      config = function() require'nvim-tree'.setup {} end
-  }
+  -- use {
+  --     'kyazdani42/nvim-tree.lua',
+  --     requires = {
+  --       'kyazdani42/nvim-web-devicons', -- optional, for file icon
+  --     },
+  --     config = function() require'nvim-tree'.setup {} end
+  -- }
 
   -- git
   use 'airblade/vim-gitgutter'
@@ -76,6 +99,7 @@ vim.cmd([[
 vim.cmd([[
   colorscheme hybrid
   set termguicolors
+  hi! clear Conceal
 ]])
 
 if vim.api.nvim_win_get_option(0, "diff") then
@@ -183,10 +207,6 @@ local nullls = require "null-ls" nullls.setup {
   },
 }
 
--- nvim-tree
-vim.cmd('map <C-n> :NvimTreeToggle<CR>')
-
-
 -- lsp
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
@@ -201,4 +221,28 @@ vim.diagnostic.config({
 -- Show line diagnostics automatically in hover window
 vim.o.updatetime = 250
 vim.cmd("autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})")
+
+-- dirvish
+vim.cmd([[
+  let g:dirvish_git_indicators = {
+  \ 'Modified'  : 'M',
+  \ 'Staged'    : 'S',
+  \ 'Untracked' : '?',
+  \ 'Renamed'   : 'R',
+  \ 'Unmerged'  : 'U',
+  \ 'Ignored'   : 'I',
+  \ 'Unknown'   : '~'
+  \ }
+  ]])
+
+-- null-ls
+-- require("null-ls").setup({
+--     sources = {
+--         require("null-ls").builtins.formatting.stylua,
+--         require("null-ls").builtins.diagnostics.eslint,
+--         require("null-ls").builtins.completion.spell,
+--     },
+-- })
+
+-- lualine
 

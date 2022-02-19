@@ -2,8 +2,9 @@ local use = require('packer').use
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'w0ng/vim-hybrid'
+
   use 'simeji/winresizer'
+  use 'w0ng/vim-hybrid'
 
   -- lsp
   use "neovim/nvim-lspconfig"
@@ -16,7 +17,7 @@ require('packer').startup(function()
     run = ':TSUpdate'
   }
 
-  -- root (TODO)
+  -- root
   use {
     "ahmedkhalf/lsp-rooter.nvim",
     config = function()
@@ -27,8 +28,7 @@ require('packer').startup(function()
   -- filer
   use "justinmk/vim-dirvish"
   use "kristijanhusak/vim-dirvish-git"
-  -- use "tamago324/lir.nvim"
-  --
+
   -- status line
   use {
     'nvim-lualine/lualine.nvim',
@@ -39,8 +39,8 @@ require('packer').startup(function()
   use { "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } }
 
   -- snipet
-  use "hrsh7th/vim-vsnip"
-  use "hrsh7th/vim-vsnip-integ"
+  -- use "hrsh7th/vim-vsnip"
+  -- use "hrsh7th/vim-vsnip-integ"
 
   -- complete
   use "hrsh7th/nvim-cmp"
@@ -56,10 +56,10 @@ require('packer').startup(function()
   use "junegunn/fzf.vim"
 
   -- telescope
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-  }
+  -- use {
+  --   'nvim-telescope/telescope.nvim',
+  --   requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  -- }
 
   -- tree
   -- use {
@@ -75,35 +75,30 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
 
   -- github
-  use {
-	'pwntester/octo.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-	  'nvim-telescope/telescope.nvim',
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function ()
-      require"octo".setup()
-    end
-  }
+  -- use {
+  --   'pwntester/octo.nvim',
+  --   requires = {
+  --     'nvim-lua/plenary.nvim',
+  --     'nvim-telescope/telescope.nvim',
+  --     'kyazdani42/nvim-web-devicons',
+  --   },
+  --   config = function ()
+  --     require"octo".setup()
+  --   end
+  -- }
 end)
 
 -- fzf
-vim.cmd([[
-  map <C-p> :Files<CR>
-  nmap <leader>; :Buffers<CR>
-  nmap ; :History<CR>
-]])
+vim.cmd("map <C-p> :Files<CR>")
 
 -- color
 vim.cmd([[
   colorscheme hybrid
-  set termguicolors
   hi! clear Conceal
 ]])
 
 if vim.api.nvim_win_get_option(0, "diff") then
-  vim.cmd("colorscheme hybrid")
+   vim.cmd("colorscheme hybrid")
 end
 
 vim.cmd([[
@@ -222,27 +217,6 @@ vim.diagnostic.config({
 vim.o.updatetime = 250
 vim.cmd("autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})")
 
--- dirvish
-vim.cmd([[
-  let g:dirvish_git_indicators = {
-  \ 'Modified'  : 'M',
-  \ 'Staged'    : 'S',
-  \ 'Untracked' : '?',
-  \ 'Renamed'   : 'R',
-  \ 'Unmerged'  : 'U',
-  \ 'Ignored'   : 'I',
-  \ 'Unknown'   : '~'
-  \ }
-  ]])
-
--- null-ls
--- require("null-ls").setup({
---     sources = {
---         require("null-ls").builtins.formatting.stylua,
---         require("null-ls").builtins.diagnostics.eslint,
---         require("null-ls").builtins.completion.spell,
---     },
--- })
-
 -- lualine
+require('lualine').setup()
 

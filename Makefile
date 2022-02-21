@@ -5,6 +5,7 @@ ubuntu: ubuntu/install ubuntu/ln
 
 .PHONY: ubuntu/install
 ubuntu/install:
+	sudo apt update
 	# docker
 	sudo snap install docker
 	# ghq

@@ -22,8 +22,7 @@ set -x PATH $PATH:$ANDROID_HOME/platform-tools
 alias v='vi'
 alias vi='vim'
 alias vim='nvim'
-alias l='ls -G'
-alias ll='ls -lG'
+alias ls='ls --color'
 alias grep='grep --color'
 
 source /opt/homebrew/opt/asdf/asdf.fish

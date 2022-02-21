@@ -6,6 +6,8 @@ ubuntu: ubuntu/install ubuntu/ln
 .PHONY: ubuntu/install
 ubuntu/install:
 	sudo apt update
+	# git
+	sudo apt install git-lfs
 	# docker
 	sudo snap install docker
 	# ghq
@@ -22,6 +24,8 @@ ubuntu/install:
 	# packer
 	rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	# rust
+	curl https://sh.rustup.rs -sSf | sh
 
 .PHONEY: ubuntu/ln
 ubuntu/ln:

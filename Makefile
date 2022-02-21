@@ -1,5 +1,10 @@
-.PHONY: install/ubuntu
-install/ubuntu:
+current_dir = $(shell pwd)
+
+.PHONY: ubuntu
+ubuntu: ubuntu/install ubuntu/ln
+
+.PHONY: ubuntu/install
+ubuntu/install:
 	# docker
 	sudo snap install docker
 	# ghq
@@ -17,3 +22,13 @@ install/ubuntu:
 	rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
+.PHONEY: ubuntu/ln
+ubuntu/ln:
+	# tmux
+	ln -sf "$(current_dir)/tmux.conf" "$(HOME)/.tmux.conf"
+	# fish
+	ln -sf "$(current_dir)/config-ubuntu.fish" "$(HOME)/.config/fish/config.fish"
+	# nvim
+	ln -sf $(current_dir)/nvim ~/.config/nvim
+	# git
+	ln -sf $(current_dir)/.gitconfig ~/.gitconfig

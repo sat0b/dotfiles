@@ -32,4 +32,4 @@ ubuntu/ln:
 	# nvim
 	ln -sf $(current_dir)/nvim ~/.config/nvim
 	# git
-	ln -sf $(current_dir)/.gitconfig ~/.gitconfig
+	ln -sf $(current_dir)/gitconfig ~/.gitconfig

@@ -1,5 +1,14 @@
 current_dir = $(shell pwd)
 
+.PHONY: mac
+mac: mac/install mac/ln
+	echo "TODO"
+
+.PHONEY: mac/ln
+mac/ln: ln
+	# fish
+	ln -sf "$(current_dir)/fish/config-mac.fish" "$(HOME)/.config/fish/config.fish"
+
 .PHONY: ubuntu
 ubuntu: ubuntu/install ubuntu/ln
 
@@ -26,13 +35,17 @@ ubuntu/install:
 	# gh
 	./install/gh.sh
 
-.PHONEY: ubuntu/ln
-ubuntu/ln:
+.PHONY: ln
+ln:
 	# tmux
 	ln -sf "$(current_dir)/tmux.conf" "$(HOME)/.tmux.conf"
-	# fish
-	ln -sf "$(current_dir)/config-ubuntu.fish" "$(HOME)/.config/fish/config.fish"
 	# nvim
 	ln -sf $(current_dir)/nvim ~/.config/nvim
 	# git
 	ln -sf $(current_dir)/gitconfig ~/.gitconfig
+
+.PHONEY: ubuntu/ln
+ubuntu/ln: ln
+	# fish
+	ln -sf "$(current_dir)/fish/config-ubuntu.fish" "$(HOME)/.config/fish/config.fish"
+

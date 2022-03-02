@@ -8,5 +8,4 @@ set -U fish_user_paths $fish_user_paths $HOME/go/bin
 # alias
 alias v='vi'
 alias vi='vim'
-alias vim='nvim'
 

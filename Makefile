@@ -31,6 +31,8 @@ ubuntu/install:
 	sudo apt install fzf
 	# rust
 	curl https://sh.rustup.rs -sSf | sh
+	# vim
+	./install/plug.sh
 	# gh
 	./install/gh.sh
 

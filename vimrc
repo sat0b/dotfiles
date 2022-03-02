@@ -2,8 +2,6 @@
 filetype plugin on
 syntax on
 
-"set mouse=a
-"set nu
 set backspace=indent,eol,start
 set backupdir=~/.vim/backup
 set clipboard=unnamed
@@ -78,11 +76,9 @@ call plug#begin('~/.config/nvim/plugged')
     " color theme
     Plug 'w0ng/vim-hybrid'
 
-
     " search
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
     Plug 'eugen0329/vim-esearch'
+    Plug 'kien/ctrlp.vim'
 
     " git
     Plug 'airblade/vim-gitgutter'
@@ -99,6 +95,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+    " tabline
+    Plug 'kh3phr3n/tabline'
 
 call plug#end()
 
@@ -122,10 +120,10 @@ nnoremap <Right> :tabn<CR>
 nnoremap <Up> :tabs<CR>
 nnoremap <Down> :windo bd<CR>
 
-" fzf
-map <C-p> :Files<CR>
-nmap <leader>; :Buffers<CR>
-nmap ; :History<CR>
+" tab
+hi TabLine cterm=none ctermfg=999 ctermbg=none
+hi TabLineFill cterm=none ctermfg=none ctermbg=none
+hi TabLineSel cterm=none ctermfg=black ctermbg=999
 
 " Autosave
 let g:auto_save = 1
@@ -143,11 +141,6 @@ hi GitGutterChangeDelete ctermfg=4
 
 nmap <silent><leader>dm :let g:gitgutter_diff_base = 'origin/master'<CR> :GitGutter<CR>
 nmap <silent><leader>dh :let g:gitgutter_diff_base = 'head'<CR> :GitGutter<CR>
-
-nnoremap <C-f> <cmd>Telescope git_files<cr>
-nnoremap <C-g> <cmd>Telescope live_grep<cr>
-nnoremap <C-b> <cmd>Telescope buffers<cr>
-nnoremap <C-h> <cmd>Telescope oldfiles<cr>
 
 " Fugitive
 command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
@@ -172,7 +165,6 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> K <plug>(lsp-hover)
   inoremap <buffer> <expr><c-f> lsp#scroll(+4)
   inoremap <buffer> <expr><c-d> lsp#scroll(-4)
-
   let g:lsp_format_sync_timeout = 1000
   let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
 

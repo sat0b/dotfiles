@@ -2,9 +2,12 @@ current_dir = $(shell pwd)
 
 .PHONY: mac
 mac: mac/install mac/ln
-	echo "TODO"
 
-.PHONEY: mac/ln
+.PHONY: mac/install
+mac/install:
+	./install/plug.sh
+
+.PHONY: mac/ln
 mac/ln: ln
 	# fish
 	ln -sf "$(current_dir)/fish/config-mac.fish" "$(HOME)/.config/fish/config.fish"
@@ -26,10 +29,6 @@ ubuntu/install:
 	./install/fish.sh
 	# fzf
 	sudo apt install fzf
-	# nvim
-	sudo snap install --beta nvim --classic
-	# packer
-	./install/packer.sh
 	# rust
 	curl https://sh.rustup.rs -sSf | sh
 	# gh
@@ -39,8 +38,8 @@ ubuntu/install:
 ln:
 	# tmux
 	ln -sf "$(current_dir)/tmux.conf" "$(HOME)/.tmux.conf"
-	# nvim
-	ln -sf $(current_dir)/nvim ~/.config/nvim
+	# vim
+	ln -sf $(current_dir)/vimrc ~/.vimrc
 	# git
 	ln -sf $(current_dir)/gitconfig ~/.gitconfig
 

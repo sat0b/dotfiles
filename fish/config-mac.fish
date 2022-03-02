@@ -21,7 +21,7 @@ set -x PATH $PATH:$ANDROID_HOME/platform-tools
 # alias
 alias v='vi'
 alias vi='vim'
-alias vim='nvim'
+# alias vim='nvim'
 
 source /opt/homebrew/opt/asdf/asdf.fish
 

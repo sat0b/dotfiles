@@ -60,7 +60,7 @@ endif
 autocmd FileType qf nnoremap <buffer> t <C-W><Enter><C-W>T
 
 " Plug
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'romainl/vim-qf'
 

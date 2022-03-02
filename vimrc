@@ -63,6 +63,7 @@ autocmd FileType qf nnoremap <buffer> t <C-W><Enter><C-W>T
 call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'romainl/vim-qf'
+    Plug 'simeji/winresizer'
 
     Plug 'mbbill/undotree'
     Plug 'mhinz/vim-grepper'
@@ -166,7 +167,7 @@ function! s:on_lsp_buffer_enabled() abort
   inoremap <buffer> <expr><c-f> lsp#scroll(+4)
   inoremap <buffer> <expr><c-d> lsp#scroll(-4)
   let g:lsp_format_sync_timeout = 1000
-  let g:lsp_diagnostics_enabled = 0         " disable diagnostics support
+  let g:lsp_diagnostics_enabled = 1
 
 endfunction
 
@@ -175,4 +176,3 @@ augroup lsp_install
     " call s:on_lsp_buffer_enabled only for languages that has the server registered.
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
-

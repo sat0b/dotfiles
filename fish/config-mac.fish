@@ -6,7 +6,7 @@ set -x PATH $PATH /opt/homebrew/bin
 set -x PATH $HOME/.cargo/bin $PATH
 set -x PATH $HOME/go/bin/ $PATH
 set -x PATH /usr/local/opt/openjdk/bin $PATH
-
+ 
 set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 set -x FZF_LEGACY_KEYBINDINGS 0
 set -x FZF_FIND_FILE_COMMAND $FZF_DEFAULT_COMMAND
@@ -22,8 +22,6 @@ set -x PATH $PATH:$ANDROID_HOME/platform-tools
 alias v='vi'
 alias vi='vim'
 alias vim='nvim'
-alias ls='ls --color'
-alias grep='grep --color'
 
 source /opt/homebrew/opt/asdf/asdf.fish
 

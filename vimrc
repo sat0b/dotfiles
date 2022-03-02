@@ -104,6 +104,7 @@ call plug#end()
 " onedark
 colorscheme hybrid
 set termguicolors
+set background=dark
 
 " review
 if &diff
@@ -111,10 +112,10 @@ if &diff
 endif
 set diffopt+=vertical
 
-hi DiffText   cterm=bold ctermfg=none ctermbg=none gui=none guifg=LightYellow guibg=none
-hi DiffChange cterm=bold ctermfg=none ctermbg=none gui=none guifg=LightBlue guibg=none
-hi DiffAdd    cterm=bold ctermfg=none ctermbg=none gui=none guifg=none guibg=#383c47
-hi DiffDelete cterm=bold ctermfg=none ctermbg=none gui=none guifg=none guibg=#333232
+hi DiffText   cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightYellow guibg=NONE
+hi DiffChange cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightBlue guibg=NONE
+hi DiffAdd    cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=#383c47
+hi DiffDelete cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=#333232
 
 nnoremap <Left> :tabp<CR>
 nnoremap <Right> :tabn<CR>
@@ -122,9 +123,9 @@ nnoremap <Up> :tabs<CR>
 nnoremap <Down> :windo bd<CR>
 
 " tab
-hi TabLine cterm=none ctermfg=999 ctermbg=none
-hi TabLineFill cterm=none ctermfg=none ctermbg=none
-hi TabLineSel cterm=none ctermfg=black ctermbg=999
+hi TabLine cterm=NONE ctermfg=999 ctermbg=NONE
+hi TabLineFill cterm=NONE ctermfg=NONE ctermbg=NONE
+hi TabLineSel cterm=NONE ctermfg=black ctermbg=999
 
 " Autosave
 let g:auto_save = 1

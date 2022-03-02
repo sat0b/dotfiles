@@ -2,8 +2,8 @@
   files = !git diff --name-only $(git merge-base HEAD origin/master)
   files-main = !git diff --name-only $(git merge-base HEAD origin/main)
   stat = !git diff --stat $(git merge-base HEAD origin/master)
-  review = !nvim -p $(git files) +\"tabdo Gdiffsplit $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
-  reviewone = !nvim -p +\"tabdo Gdiffsplit $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  review = !vim -p $(git files) +\"tabdo Gdiffsplit $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  reviewone = !vim -p +\"tabdo Gdiffsplit $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
 
 [user]
 	email = sat0b.3ee@gmail.com

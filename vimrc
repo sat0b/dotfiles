@@ -102,7 +102,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " onedark
-colorscheme hybrid
 set termguicolors
 set background=dark
 

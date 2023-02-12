@@ -1,7 +1,6 @@
 " Basic
 filetype plugin on
 syntax on
-
 set backspace=indent,eol,start
 set backupdir=~/.vim/backup
 set clipboard=unnamed
@@ -73,9 +72,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'houtsnip/vim-emacscommandline'
     Plug 'tpope/vim-eunuch'
     Plug 'justinmk/vim-dirvish'
-
-    " color theme
-    Plug 'w0ng/vim-hybrid'
 
     " search
     Plug 'eugen0329/vim-esearch'

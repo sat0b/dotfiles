@@ -77,7 +77,8 @@ call plug#begin('~/.vim/plugged')
 
     " search
     Plug 'eugen0329/vim-esearch'
-    Plug 'kien/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
     " git
     Plug 'airblade/vim-gitgutter'
@@ -144,6 +145,9 @@ command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 " markdown
 let g:vim_markdown_folding_disabled = 1
 
+" dirvish
+let g:dirvish_relative_paths = 1
+
 " vim-lsp
 if executable('pylsp')
     " pip install python-lsp-server
@@ -175,6 +179,10 @@ function! s:on_lsp_buffer_enabled() abort
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 
     " refer to doc to add more commands
+    nmap \gd :LspDefinition<cr>
+    nmap \gt :tab split<cr>:LspDefinition<cr>
+    nmap \gs :sp<cr>:LspDefinition<cr>
+    nmap \gv :vsp<cr>:LspDefinition<cr>
 endfunction
 
 augroup lsp_install

@@ -100,14 +100,12 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
-" onedark
-set termguicolors
+" color
 set background=dark
-" review
-if &diff
-    colorscheme hybrid
-endif
 set diffopt+=vertical
+
+hi Pmenu ctermfg=188 ctermbg=236
+hi PmenuSel ctermfg=188 ctermbg=24
 
 hi DiffText   cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightYellow guibg=NONE
 hi DiffChange cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightBlue guibg=NONE

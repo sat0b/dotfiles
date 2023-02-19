@@ -20,9 +20,11 @@ set -x PATH $PATH:$ANDROID_HOME/platform-tools
 alias emulator=$HOME/Library/Android/sdk/emulator/emulator
 
 # alias
-alias v='vi'
-alias vi='vim'
-# alias vim='nvim'
+alias vi=/opt/homebrew/bin/vim
+alias vim=/opt/homebrew/bin/vim
 
 alias asdf='/opt/homebrew/Cellar/asdf/0.11.1/libexec/bin/asdf'
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+

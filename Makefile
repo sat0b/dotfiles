@@ -40,10 +40,13 @@ ubuntu/install:
 ln:
 	# tmux
 	ln -sf "$(current_dir)/tmux.conf" "$(HOME)/.tmux.conf"
+	# nvim
+	ln -sf $(current_dir)/nvim ~/.config/nvim
 	# vim
 	ln -sf $(current_dir)/vimrc ~/.vimrc
 	# git
 	ln -sf $(current_dir)/gitconfig ~/.gitconfig
+
 
 .PHONEY: ubuntu/ln
 ubuntu/ln: ln

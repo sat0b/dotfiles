@@ -4,6 +4,7 @@
   stat = !git diff --stat $(git merge-base HEAD origin/master)
   review = !vim -p $(git files) +\"tabdo Gdiffsplit $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
   reviewone = !vim -p +\"tabdo Gdiffsplit $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  tree = log --graph --all --format=\"%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s\"
 
 [user]
 	email = sat0b.3ee@gmail.com
@@ -18,3 +19,5 @@
 [core]
     editor = vim
 	autocrlf = input
+[blame]
+	date = short

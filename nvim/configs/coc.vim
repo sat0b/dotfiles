@@ -165,3 +165,8 @@ nmap <space>e <Cmd>CocCommand explorer<CR>
 " signcolumnの色をNoneに
 hi SignColumn ctermbg=NONE
 
+nmap <silent> \ge <Plug>(coc-definition)
+nmap <silent> \gs :split<CR><Plug>(coc-definition)
+nmap <silent> \gv :vsplit<CR><Plug>(coc-definition)
+nmap <silent> \gt :tabnew<CR><Plug>(coc-definition)
+

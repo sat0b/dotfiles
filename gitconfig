@@ -21,3 +21,5 @@
 	autocrlf = input
 [blame]
 	date = short
+[rebase]
+	autosquash = true

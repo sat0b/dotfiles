@@ -6,11 +6,10 @@ call plug#begin()
   Plug 'mbbill/undotree'
   Plug 'mhinz/vim-grepper'
   Plug 'vim-scripts/vim-auto-save'
-  Plug 'jiangmiao/auto-pairs'
   Plug 'houtsnip/vim-emacscommandline'
   Plug 'tpope/vim-eunuch'
-  Plug 'justinmk/vim-dirvish'
-  Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
+  Plug 'cocopon/vaffle.vim'
+
   Plug 'mhinz/vim-startify'
   Plug 'svermeulen/vim-yoink'
 
@@ -40,12 +39,18 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
+  " copilot
+  " Plug 'github/copilot.vim'
+
 call plug#end()
+
+" vaffle
+nnoremap - :Vaffle<CR>
 
 " airline
 let g:airline_theme='minimalist'
 
-" Comment
+" Lua setup
 lua << EOF
 require('Comment').setup()
 EOF

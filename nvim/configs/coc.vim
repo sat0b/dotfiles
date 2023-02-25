@@ -162,9 +162,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " === 追加設定 
 nmap <space>e <Cmd>CocCommand explorer<CR>
 
-" signcolumnの色をNoneに
-hi SignColumn ctermbg=NONE
-
 nmap <silent> \ge <Plug>(coc-definition)
 nmap <silent> \gs :split<CR><Plug>(coc-definition)
 nmap <silent> \gv :vsplit<CR><Plug>(coc-definition)

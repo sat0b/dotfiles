@@ -20,10 +20,13 @@ hi DiffChange cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightBlue guib
 hi DiffAdd    cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=#383c47
 hi DiffDelete cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=#333232
 
+" signcolumnの色をNoneに
+hi SignColumn ctermbg=None
+
 " tab
-hi TabLine cterm=NONE ctermfg=999 ctermbg=NONE
+hi TabLine ctermbg=NONE
 hi TabLineFill cterm=NONE ctermfg=NONE ctermbg=NONE
-hi TabLineSel cterm=NONE ctermfg=black ctermbg=999
+hi TabLineSel cterm=NONE ctermfg=188 ctermbg=999
 
 " indent
 augroup INDENT_2
@@ -37,3 +40,4 @@ augroup INDENT_2
 augroup END
 
 let g:indent_blankline_enabled = 0
+

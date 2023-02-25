@@ -23,3 +23,5 @@
 	date = short
 [rebase]
 	autosquash = true
+[ghq]
+	root=~/Dropbox/ghq

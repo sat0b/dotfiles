@@ -1,3 +1,3 @@
-source ~/.config/nvim/configs/basic.vim
-source ~/.config/nvim/configs/plug.vim
-source ~/.config/nvim/configs/coc.vim
+runtime! configs/basic.vim
+runtime! configs/plug.vim
+runtime! configs/coc.vim

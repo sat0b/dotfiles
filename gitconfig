@@ -23,3 +23,8 @@
 	date = short
 [rebase]
 	autosquash = true
+
+[ghq]
+	root=~/Dropbox/ghq
+[push]
+	autoSetupRemote = true

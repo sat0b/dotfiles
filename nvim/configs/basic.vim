@@ -1,4 +1,5 @@
 set mouse=
+set shortmess+=I
 
 " カーソルキーでbuffer移動
 nnoremap <Left> :bp<CR>
@@ -9,21 +10,13 @@ set clipboard+=unnamedplus
 autocmd BufEnter * silent! lcd %:p:h
 
 " color
-set background=dark
-set diffopt+=vertical
-
-hi Pmenu ctermfg=188 ctermbg=236
-hi PmenuSel ctermfg=188 ctermbg=24
-
-hi DiffText   cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightYellow guibg=NONE
-hi DiffChange cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=LightBlue guibg=NONE
-hi DiffAdd    cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=#383c47
-hi DiffDelete cterm=bold ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=#333232
+ set background=dark
+ set diffopt+=vertical
 
 " tab
-hi TabLine cterm=NONE ctermfg=999 ctermbg=NONE
+hi TabLine ctermbg=NONE
 hi TabLineFill cterm=NONE ctermfg=NONE ctermbg=NONE
-hi TabLineSel cterm=NONE ctermfg=black ctermbg=999
+hi TabLineSel cterm=NONE ctermfg=188 ctermbg=999
 
 " indent
 augroup INDENT_2

@@ -11,6 +11,8 @@ mac/install:
 mac/ln: ln
 	# fish
 	ln -sf "$(current_dir)/fish/config-mac.fish" "$(HOME)/.config/fish/config.fish"
+	# history backup
+	ln -sf "$(HOME)/Dropbox/fish/fish_history" "$(HOME)/.local/share/fish/fish_history"
 
 .PHONY: ubuntu
 ubuntu: ubuntu/install ubuntu/ln

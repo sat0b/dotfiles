@@ -6,18 +6,20 @@ call plug#begin()
   Plug 'mbbill/undotree'
   Plug 'mhinz/vim-grepper'
   Plug 'vim-scripts/vim-auto-save'
-  Plug 'jiangmiao/auto-pairs'
   Plug 'houtsnip/vim-emacscommandline'
   Plug 'tpope/vim-eunuch'
   Plug 'justinmk/vim-dirvish'
-  Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
-  Plug 'mhinz/vim-startify'
-  Plug 'svermeulen/vim-yoink'
+  " Plug 'svermeulen/vim-yoink'
+
+  " theme
+  Plug 'dracula/vim', { 'as': 'dracula' }
 
   " search
   Plug 'eugen0329/vim-esearch'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf.vim'
+  " Plug 'nvim-telescope/telescope.nvim'
 
   " git
   Plug 'airblade/vim-gitgutter'
@@ -30,7 +32,6 @@ call plug#begin()
   Plug 'plasticboy/vim-markdown'
 
   " Coc
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
   " comment
@@ -40,7 +41,21 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
+  " copilot
+  Plug 'github/copilot.vim'
+
+  " firebase
+  Plug 'delphinus/vim-firestore'
+
 call plug#end()
+
+" theme
+set termguicolors
+colorscheme dracula
+
+" ctrlp
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|ios/Pods'
 
 " airline
 let g:airline_theme='minimalist'
@@ -57,17 +72,8 @@ autocmd BufNewFile,BufRead Podfile,*.podspec set filetype=ruby
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 2
 
-" Yoink
-nmap p <plug>(YoinkPaste_p)
-nmap P <plug>(YoinkPaste_P)
-
-nmap <c-n> <plug>(YoinkPostPasteSwapBack)
-nmap <c-p> <plug>(YoinkPostPasteSwapForward)
-
-nmap p <plug>(YoinkPaste_p)
-nmap P <plug>(YoinkPaste_P)
-
-" Also replace the default gp with yoink paste so we can toggle paste in this case too
-nmap gp <plug>(YoinkPaste_gp)
-nmap gP <plug>(YoinkPaste_gP)
-
+" " telescope
+" nnoremap <leader>tf <cmd>Telescope find_files<cr>
+" nnoremap <leader>tg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>tb <cmd>Telescope buffers<cr>
+" nnoremap <leader>th <cmd>Telescope help_tags<cr>

@@ -13,7 +13,6 @@ call plug#begin()
 
   " theme
   Plug 'dracula/vim', { 'as': 'dracula' }
-
   " search
   Plug 'eugen0329/vim-esearch'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -42,7 +41,7 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
 
   " copilot
-  Plug 'github/copilot.vim'
+  " Plug 'github/copilot.vim'
 
   " firebase
   Plug 'delphinus/vim-firestore'
@@ -60,7 +59,7 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|ios/Pods'
 " airline
 let g:airline_theme='minimalist'
 
-" Comment
+" Lua setup
 lua << EOF
 require('Comment').setup()
 EOF

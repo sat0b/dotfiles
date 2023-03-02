@@ -13,6 +13,9 @@ autocmd BufEnter * silent! lcd %:p:h
  set background=dark
  set diffopt+=vertical
 
+" signcolumnの色をNoneに
+hi SignColumn ctermbg=None
+
 " tab
 hi TabLine ctermbg=NONE
 hi TabLineFill cterm=NONE ctermfg=NONE ctermbg=NONE
@@ -30,3 +33,4 @@ augroup INDENT_2
 augroup END
 
 let g:indent_blankline_enabled = 0
+

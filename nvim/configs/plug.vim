@@ -17,7 +17,6 @@ call plug#begin()
 
   " theme
   Plug 'dracula/vim', { 'as': 'dracula' }
-  Plug 'navarasu/onedark.nvim'
   Plug 'nvim-tree/nvim-web-devicons'
 
   " search
@@ -34,6 +33,7 @@ call plug#begin()
 
   " language
   Plug 'plasticboy/vim-markdown'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " Coc
   Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}

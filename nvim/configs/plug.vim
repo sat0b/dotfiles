@@ -2,23 +2,26 @@ call plug#begin()
   Plug 'nvim-lua/plenary.nvim'
   Plug 'romainl/vim-qf'
   Plug 'simeji/winresizer'
+  Plug 'bronson/vim-trailing-whitespace'
 
+  Plug 'sheerun/vim-polyglot'
   Plug 'mbbill/undotree'
   Plug 'mhinz/vim-grepper'
   Plug 'vim-scripts/vim-auto-save'
   Plug 'houtsnip/vim-emacscommandline'
   Plug 'tpope/vim-eunuch'
   Plug 'justinmk/vim-dirvish'
-  " Plug 'svermeulen/vim-yoink'
+  Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
 
   " theme
   Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'navarasu/onedark.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+
   " search
   Plug 'eugen0329/vim-esearch'
-  Plug 'ctrlpvim/ctrlp.vim'
-  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  " Plug 'junegunn/fzf.vim'
-  " Plug 'nvim-telescope/telescope.nvim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 
   " git
   Plug 'airblade/vim-gitgutter'
@@ -41,7 +44,7 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
 
   " copilot
-  " Plug 'github/copilot.vim'
+  Plug 'github/copilot.vim'
 
   " firebase
   Plug 'delphinus/vim-firestore'
@@ -52,9 +55,8 @@ call plug#end()
 set termguicolors
 colorscheme dracula
 
-" ctrlp
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|ios/Pods'
+" user fzf-lua on dirvish
+autocmd FileType dirvish nnoremap <buffer><silent> <c-p> :FzfLua files<cr>
 
 " airline
 let g:airline_theme='minimalist'
@@ -71,8 +73,32 @@ autocmd BufNewFile,BufRead Podfile,*.podspec set filetype=ruby
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 2
 
-" " telescope
-" nnoremap <leader>tf <cmd>Telescope find_files<cr>
-" nnoremap <leader>tg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>tb <cmd>Telescope buffers<cr>
-" nnoremap <leader>th <cmd>Telescope help_tags<cr>
+" esearch
+let g:esearch = {}
+let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'new')}
+
+" Show the popup with git-show information on CursorMoved is a git revision context is hovered.
+let g:GitShow = {ctx -> ctx().rev &&
+  \ esearch#preview#shell('git show ' . split(ctx().filename, ':')[0], {
+  \   'let': {'&filetype': 'git', '&number': 0},
+  \   'row': screenpos(0, ctx().begin, 1).row,
+  \   'col': screenpos(0, ctx().begin, col([ctx().begin, '$'])).col,
+  \   'width': 47, 'height': 3,
+  \ })
+  \}
+" Debounce the popup updates using 70ms timeout.
+autocmd User esearch_win_config
+      \  let b:git_show = esearch#async#debounce(g:GitShow, 70)
+      \| autocmd CursorMoved <buffer> call b:git_show.apply(b:esearch.ctx)
+
+nnoremap <leader>fh :call esearch#init({'paths': esearch#xargs#git_log()})<cr>
+
+" Search in modified files only
+nnoremap <leader>fm :call esearch#init({'paths': '`git ls-files --modified`'})<cr>
+
+" Search in unmerged commits using range specification
+nnoremap <leader>fu :call esearch#init({'paths': esearch#xargs#git_log('development..HEAD')})<cr>
+
+" Search in stashed entries
+nnoremap <leader>fs :call esearch#init({'paths': esearch#xargs#git_stash()})<cr>
+

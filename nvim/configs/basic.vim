@@ -1,4 +1,4 @@
-set mouse=
+" set mouse=
 set shortmess+=I
 
 " カーソルキーでbuffer移動
@@ -10,8 +10,8 @@ set clipboard+=unnamedplus
 autocmd BufEnter * silent! lcd %:p:h
 
 " color
- set background=dark
- set diffopt+=vertical
+set background=dark
+set diffopt+=vertical
 
 " signcolumnの色をNoneに
 hi SignColumn ctermbg=None

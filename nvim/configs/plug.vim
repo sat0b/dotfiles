@@ -10,8 +10,10 @@ call plug#begin()
   Plug 'vim-scripts/vim-auto-save'
   Plug 'houtsnip/vim-emacscommandline'
   Plug 'tpope/vim-eunuch'
-  Plug 'justinmk/vim-dirvish'
-  Plug 'roginfarrer/vim-dirvish-dovish', {'branch': 'main'}
+
+  " lir
+  Plug 'tamago324/lir.nvim'
+  Plug 'tamago324/lir-git-status.nvim'
 
   " theme
   Plug 'dracula/vim', { 'as': 'dracula' }
@@ -54,9 +56,6 @@ call plug#end()
 " theme
 set termguicolors
 colorscheme dracula
-
-" user fzf-lua on dirvish
-autocmd FileType dirvish nnoremap <buffer><silent> <c-p> :FzfLua files<cr>
 
 " airline
 let g:airline_theme='minimalist'

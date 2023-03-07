@@ -1,5 +1,6 @@
-" set mouse=
 set shortmess+=I
+set undofile
+set undodir=~/Dropbox/nvim
 
 " カーソルキーでbuffer移動
 nnoremap <Left> :bp<CR>
@@ -33,4 +34,5 @@ augroup INDENT_2
 augroup END
 
 let g:indent_blankline_enabled = 0
+
 
